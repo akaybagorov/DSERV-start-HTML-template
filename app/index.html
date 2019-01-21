@@ -39,50 +39,25 @@
     <div class="row">
       <div class="col-8 offset-2">
         <img class="img-responsive" src="img/banner.jpg" alt="DSERV &mdash; start HTML template">
-        <h1>DSERV — стартовый HTML шаблон для небольших проектов</h1>
-        <p>За основу шаблона взят <a href="https://github.com/agragregra/OptimizedHTML-4">OptimizedHTML-4</a> от <a href="https://webdesign-master.ru/">WebDesign Master</a>. Была переделана логика тасков, добавлены новые таски, для удобства добавлены новые переменные. <br>Используются следующие инструменты:
-          <ul>
-            <li>Gulp 4</li>
-            <li>Bootstrap 4</li>
-            <li>Fontawesome 5</li>
-          </ul>
+        <h1>DSERV — стартовый HTML шаблон для frontend разработчиков.</h1>
+        <p>За основу шаблона взят <a href="https://github.com/agragregra/OptimizedHTML-4">OptimizedHTML-4</a> от <a href="https://webdesign-master.ru/">WebDesign Master</a>. Была переделана логика тасков, добавлены новые таски, для удобства добавлены новые переменные.</p>
+        <p>DSERV по-умолчанию использует следующие инструменты Gulp 4, Bootstrap 4 (reboot + grid), Fontawesome 5, Sass, Browsersync, Autoprefixer, Clean-CSS, Uglify, Imagemin, Rsync.</p>
+        <p>Кросс-браузерная совместимость: IE9+.
         </p>
-        <p>Структура файлов выглядит следующим образом:
-          <ul>
-            <li>app
-              <ul>
-                <li>fonts</li>
-                <li>img</li>
-                <li>js</li>
-                <li>libs</li>
-                <li>sass</li>
-                <li>*.html</li>
-              </ul>
-            </li>
-            <li>watch
-              <ul>
-                <li>css</li>
-                <li>fonts</li>
-                <li>img</li>
-                <li>js</li>
-                <li>*.html</li>
-              </ul>
-            </li>
-            <li>dist
-              <ul>
-                <li>css</li>
-                <li>fonts</li>
-                <li>img</li>
-                <li>js</li>
-                <li>*.html</li>
-              </ul>
-            </li>
-            <li>gulpfile.js</li>
-            <li>package.json</li>
-          </ul>
-        </p>
-        <p>В папке 'app' находятся все исходники проекта, в том числе библиотеки, шрифты и изображения. <br>В папку 'watch' в процессе разработки компилируются и копируются неоптимизированные файлы и изображения. <br>В папку 'dist' сохраняются все сжатые и оптимизированные файлы, готовые к деплою на сервер.</p>
-        <br>
+        <h2>Быстрый старт</h2>
+        <ol>
+          <li><a href="https://github.com/akaybagorov/DSERV-start-HTML-template/archive/master.zip">Скачайте</a> архив проекта c Github</li>
+          <li>Установите модули командой `npm i`</li>
+          <li>Запустите шаблон командой `gulp`</li>
+        </ol>
+        <h3>Базовые таски</h3>
+        <ul>
+          <li>`gulp` — таск для веб-разработки (sass, js, browsersync, watch)</li>
+          <li>`gulp build` — сборка и минификация html+css+js и оптимизация изображений (jpeg, png, svg) в папку 'dist'</li>
+          <li>`gulp rsync` — деплой проекта на сервер используя <strong>rsync</strong></li>
+        </ul>
+        <h2>Настройки</h2>
+        <p>Для добавления новой билиотеки подключите ее файлы стилей в файле 'app/sass/_libs.sass', а скрипты в файле 'gulpfile.js' в переменную `libs_array`.</p>
         <div class="row">
           <div class="col-1 offset-5"><a href="https://t.me/akaybagorov"><i class="fab fa-telegram-plane"></i></a></div>
           <div class="col-1"><a href="https://vk.me/kaybagorov"><i class="fab fa-vk"></i></a></div>
