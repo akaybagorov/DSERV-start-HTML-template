@@ -1,18 +1,13 @@
   var path = {
       app: {
             html: 'app/*.html',
-            js: 'app/js/*.js',
             sass: 'app/sass/**/*.sass',
             img: 'app/img/**/*.*',
-            fonts: 'app/fonts/**/*.*',
-            libs: 'libs/**/*.js'
+            fonts: 'app/fonts/**/*.*'
       },
       watch: {
-              html: 'watch/',
-              js: 'watch/js/',
-              css: 'watch/css/',
-              img: 'watch/img/',
-              fonts: 'watch/fonts/'
+              js: 'app/js/',
+              css: 'app/css/'
       },
       dist: {
               html: 'dist/',
@@ -49,7 +44,7 @@
   gulp.task('browser-sync', function() {
     browserSync({
       server: {
-        baseDir: 'watch'
+        baseDir: 'app'
       },
       notify: false,
       // open: false,
@@ -57,14 +52,13 @@
       // tunnel: true, tunnel: "projectname",
     })
   });
-  //Копирование html в папку watch и перезагрузка браузера при изменении HTML
+  //Мониторинг ищменений в html и перезагрузка браузера при их внесении
   gulp.task('html:watch', function(done) {
     gulp.src(path.app.html)
-    .pipe(gulp.dest(path.watch.html))
     .pipe(browserSync.reload({ stream: true }));
     done();
   });
-  //Сборка и минификация CSS из SASS, копирование файла в папку watch, перезагрузка браузера при изменении стилей
+  //Сборка и минификация CSS из SASS, перезагрузка браузера при изменении стилей
   gulp.task('styles:watch', function(done) {
     gulp.src(path.app.sass)
     .pipe(sass({ outputStyle: 'expanded' }).on("error", notify.onError()))
@@ -75,7 +69,7 @@
     .pipe(browserSync.reload({ stream: true }));
     done();
   });
-  //Сборка и минификация JS, копирование файла в папку watch, перезагрузка браузера при изменении скриптов
+  //Сборка JS, перезагрузка браузера при изменении скриптов
   gulp.task('scripts:watch', function(done) {
     gulp.src(libs_array)
     .pipe(concat('scripts.min.js'))
@@ -83,33 +77,12 @@
     .pipe(browserSync.reload({ stream: true }));
     done();
   });
-  //Копирование шрифтов в папку watch, перезагрузка браузера при добавлении новых
-  gulp.task('fonts:watch', function(done) {
-    gulp.src(path.app.fonts)
-    .pipe(gulp.dest(path.watch.fonts))
-    .pipe(browserSync.reload({ stream: true }));
-    done();
-  })
-  //Копирование изображений в папку watch, перезагрузка браузера при добавлении новых
-  gulp.task('img:watch', function(done) {
-    gulp.src(path.app.img)
-    .pipe(gulp.dest(path.watch.img))
-    .pipe(browserSync.reload({ stream: true }));
-    done();
-  })
-  //Удаление папки watch
-  gulp.task('removewatch', function (done) {
-    del.sync('watch');
-    done();
-  });
   gulp.task('watch', function() {
     gulp.watch(path.app.html, gulp.parallel('html:watch'));
     gulp.watch(path.app.sass, gulp.parallel('styles:watch'));
-    gulp.watch([path.app.libs, path.app.js], gulp.parallel('scripts:watch'));
-    gulp.watch(path.app.img, gulp.parallel('img:watch'));
-    gulp.watch(path.app.fonts, gulp.parallel('fonts:watch'))
+    gulp.watch(libs_array, gulp.parallel('scripts:watch'));
   });
-  gulp.task('default', gulp.parallel('removewatch', 'html:watch', 'styles:watch',  'scripts:watch', 'img:watch', 'fonts:watch', 'browser-sync', 'watch'));
+  gulp.task('default', gulp.parallel('styles:watch', 'scripts:watch', 'html:watch', 'browser-sync', 'watch'));
 
   //dist таски для подготовки к деплою, все что можно сжимается и оптимизируется
   //Минификация html в папку dist

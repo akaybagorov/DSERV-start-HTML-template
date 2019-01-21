@@ -1,6 +1,7 @@
 /node_modules/
 /dist/
-/watch/
+/app/css/
+/app/js/scripts.min.js
 /.git/
 /**/_backstage
 /**/package-lock.json
